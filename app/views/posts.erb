@@ -1,0 +1,29 @@
+<h1>Hacker News</h1>
+
+<!-- We create a form that allows us to create a new post -->
+<!-- The contents of this form will be sent to our route "/post" (the absolute route would read www.example.com/post ) -->
+<form action="/post">
+  <!-- We create an input requesting a title from the user -->
+  <label for="title">Title:</label>
+  <input type="text" name="title" id="title">
+  <!-- We create an input requesting a url from the user -->
+  <label for="url">URL:</label>
+  <input type="text" name="url" id="url">
+  <!-- This submits the content to route we have put in the form's action attribute - '/post' -->
+  <input type="submit">
+</form>
+
+
+<!-- We iterate over all of our posts [an array of individual post instances] -->
+<!-- We give each post instance the variable name post to be used within our iteration -->
+<!-- To access to @posts variable created in app.rb, we must wrap it in Embedded Ruby (ERB) tags <% %> -->
+<% @posts.each do |post| %>
+  <!-- We create an "a" tag (a link) that contains a heading tag -->
+  <!-- Inside of this heading tag, we use PRINTED ERB tags <%= %> (notice the addition of the equals sign) -->
+  <a href="<%= post.url %>"><h2><%= post.title %></h2></a>
+  <!-- We display our post's votes in printed erb, and "interpolate" the post id into the href of the "A" tag -->
+  <!-- Our "A" tag below will send a request to our path "/upvote" and adds the params "?id=" -->
+  <p><%= post.votes %> votes - <a href="/upvote?id=<%= post.id %>">Upvote this post</a> </p>
+<% end %>
+
+
